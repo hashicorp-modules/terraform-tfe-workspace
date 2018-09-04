@@ -9,7 +9,6 @@
 
 1. Fork the [`hashicorp-modules/terraform-tfe-workspace`](https://github.com/hashicorp-modules/terraform-tfe-workspace) repo
 1. [Export environment variables](#export-env-vars). You can alternatively enter these when prompted, though you'll have to do it every Terraform command.
-  - `TFE_TOKEN` will be copied from the "Generate token" step above
 1. `$ terraform init`
 1. `$ terraform plan`
 1. `$ terraform apply`
