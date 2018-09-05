@@ -2,7 +2,7 @@
 
 Creates a workspace in TFE connected to VCS and sets up the appropriate producer/consumer users and permissions.
 
-See [examples here](./examples).
+See [examples here](https://github.com/hashicorp-modules/terraform-tfe-workspace/tree/master/examples).
 
 ## Environment Variables
 
@@ -23,7 +23,7 @@ See [examples here](./examples).
 - `tfe_consumer_team_id`: [Optional] ID of "Consumer" team in TFE to use, if empty, a team will be created.
 - `tfe_consumer_team_access`: [Optional] Access level for the "Consumer" team, defaults to "read".
 - `vcs_repo_identifier`: [Optional] Org and repo name for VCS, defaults to `hashicorp-modules/terraform-tfe-workspace`.
-- `vcs_repo_branch`: [Optional] Branch name, defaults to "master".
+- `vcs_repo_branch`: [Optional] github branch name, defaults to "master".
 - `working_directory`: [Optional] Working directory for Terraform to run in, defaults to the root directory.
 
 ## Outputs

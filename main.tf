@@ -55,6 +55,20 @@ data "template_file" "tfe_oauth_token" {
   depends_on = ["tfe_team.producer"]
 }
 
+resource "null_resource" "tfe_oauth_token" {
+  triggers = {
+    token        = "${var.tfe_token}"
+    organization = "${var.tfe_org_name}"
+  }
+
+  provisioner "local-exec" {
+    command = "${data.template_file.tfe_oauth_token.rendered}"
+  }
+
+  # Don't generate the oAuth token until we know the organization exists
+  depends_on = ["tfe_team.producer"]
+}
+
 # Create Producer workspace
 resource "tfe_workspace" "producer" {
   name         = "${var.tfe_producer_name}"
@@ -68,6 +82,9 @@ resource "tfe_workspace" "producer" {
   }
 
   working_directory = "${var.working_directory}"
+
+  # Don't generate the oAuth token until it exists
+  depends_on = ["null_resource.tfe_oauth_token"]
 }
 
 # Producer team has admin priviledges on "Producer" workspace
@@ -185,11 +202,4 @@ resource "tfe_variable" "confirm_destroy" {
   value        = "1"
   category     = "env"
   workspace_id = "${tfe_workspace.producer.id}"
-}
-
-# Add remote enhanced backend Terraform config locally
-resource "null_resource" "remote_backend" {
-  provisioner "local-exec" {
-    command = "echo 'terraform { backend \"remote\" {} }' > tfe.tf"
-  }
 }
