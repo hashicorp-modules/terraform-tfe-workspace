@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo "Installing jq"
-sudo curl --silent -Lo /bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
-sudo chmod +x /bin/jq
+curl --silent -Lo ./jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+chmod +x jq
 
 echo "VCS must be enabled in your TFE organization for this to work"
 echo "Writing oAuth token locally to be read by Terraform"
